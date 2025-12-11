@@ -33,8 +33,6 @@ public class BootcampGatewayApplication {
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
 		assert definitions != null;
 		definitions.stream().filter(routeDefinition -> routeDefinition.getId().matches(".*-service")).forEach(routeDefinition -> {
-			//ReactiveCompositeDiscoveryClient_BOOTCAMP-CUSTOMER
-			//bootcamp-
 			String name = routeDefinition.getId().replaceAll("-service", "");
 			groups.add(GroupedOpenApi.builder().pathsToMatch("/" + name + "/**").group(name).build());
 		});
